@@ -48,27 +48,22 @@ In the meantime, if you have any ideas as to how I can make `scrollbar-kak` more
 
 There are a number of *face* options you can edit to customize your scrollbar's look:
 
-`Scrollbar`: This sets the main face for your scrollbar column, i.e. its background colour and the main scrollbar colour.
+`Scrollbar`: This sets the face used for the "track" of the scrollbar, all the portions of the buffer not currently visible.
 
-`ScrollbarSel`: Sets the colour for in-view selections.
+`ScrollThumb`: This sets the face used for "thumb" of the scrollbar, the portion of the buffer currently visible.
 
-`ScrollbarHL`: Sets the colour for out-of-view selections, i.e. the scrollbar's display of selections that are outside your current view. I find it helpful to set this to a more... alarming colour, so that you notice when you are editing text outside your current view.
+In both cases, the background colour of the face paints the regular scrollbar appearance, while the foreground colour is used to mark the number of selections in that portion of the buffer (see the `selection_chars` option below). You probably want to set the `ScrollThumb` foreground to be neutral (you can already see the position of cursors on-screen) and the `Scrollbar` foreground to be bright and eye-catching, to remind you of the presence of off-screen cursors.
 
 Here are a few examples of how you can change the scrollbar colours. Please enter `:doc faces` into kak for more information:
 
-`set-face global Scrollbar rgb:7080a0,rgb:281090`
+```kak
+set-face global Scrollbar bright-yellow,white
+set-face global ScrollThumb bright-black,black
+```
 
-`set-face global ScrollbarSel green`
+You can change how selections are marked on the scrollbar with the following option:
 
-`set-face global ScrollbarHL @Information`
-
-You can change which characters are used for displaying the scrollbar with the following options:
-
-`scrollbar_char` : Sets the character used for the scrollbar.
-
-`scrollbar_sel_char` : Sets the character used for selections.
-
-Scrollbar.kak will try to store the compiled tool in the its own plugin folder, but there is the `scrollbar_plugin_path` option if you need to change where the tool is stored.
+`selection_chars`: A space-separated list of characters used as icons to represent the number of selections in a region of the buffer. For example, if the option is set to "0 1 2 M", then "0" will be displayed in portions of the scrollbar with no selections, "1" in portions with one selection, "2" in portions with two selections, and "M" in portions with three or more. If the option begins with a space, an actual space will be used to represent "no selections".
 
 If you've set up the scrollbar and played about with adding new highlighters, you might want to push it back to its left-most position on the highlighter stack. To do so, use the `move-scrollbar-to-left` command.
 
