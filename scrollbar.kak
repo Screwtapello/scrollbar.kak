@@ -66,7 +66,7 @@ define-command update-scrollbar -hidden -override %{
                 for (i = view_top; i <= view_bottom; i++) {
                     # Choose a flag symbol based on the number of selections
                     if (selections[i] > length(sel_chars)) {
-                        count = length(sel_chars)
+                        count = length(sel_chars) - 1
                     } else {
                         count = selections[i]
                     }
